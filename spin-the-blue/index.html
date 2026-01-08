@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Spin the Blue - An interactive 3D Earth experience at StarHop Space Theme Park">
+    <title>Spin the Blue | StarHop</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Event Banner -->
+    <div id="event-banner" class="event-banner">
+        <span class="event-text">LATEST EVENT: Annual Solar Eclipse (Antarctica) ›</span>
+    </div>
+
+    <!-- 3D Canvas Container -->
+    <div id="canvas-container"></div>
+
+    <!-- Event Popup -->
+    <div id="event-popup" class="event-popup hidden">
+        <div class="popup-content">
+            <button id="popup-close" class="popup-close">×</button>
+            <h2 class="popup-title">Annual Solar Eclipse</h2>
+            <div class="popup-location">
+                <span class="location-icon">📍</span>
+                <span>Antarctica</span>
+            </div>
+            <p class="popup-description">
+                Experience the rare total solar eclipse visible from the Antarctic continent.
+                The Moon will completely cover the Sun for approximately 2 minutes and 15 seconds,
+                creating an unforgettable celestial spectacle against the pristine ice landscape.
+            </p>
+            <div class="popup-details">
+                <div class="detail-item">
+                    <span class="detail-label">Date</span>
+                    <span class="detail-value">December 4, 2026</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Duration</span>
+                    <span class="detail-value">2m 15s totality</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Best Viewing</span>
+                    <span class="detail-value">Antarctic Peninsula</span>
+                </div>
+            </div>
+            <button class="popup-cta">Book Expedition</button>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Loading Earth...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>

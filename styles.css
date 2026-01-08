@@ -1,0 +1,437 @@
+/* ===================================
+   SPACE THEME PARK - DESIGN SYSTEM
+   =================================== */
+
+/* CSS Variables - Space Palette */
+:root {
+    --color-black: #000000;
+    --color-deep-navy: #0a0f1e;
+    --color-navy: #0d1526;
+    --color-dark-blue: #131b2e;
+    --color-cool-blue: #4da6ff;
+    --color-cyan: #00d4ff;
+    --color-soft-purple: #9f7aea;
+    --color-white: #ffffff;
+    --color-white-dim: rgba(255, 255, 255, 0.7);
+    --color-white-muted: rgba(255, 255, 255, 0.4);
+
+    /* Glassmorphism */
+    --glass-bg: rgba(10, 15, 30, 0.6);
+    --glass-bg-hover: rgba(20, 30, 50, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-hover: rgba(255, 255, 255, 0.15);
+
+    /* Glow Effects */
+    --glow-cyan: 0 0 40px rgba(0, 212, 255, 0.3);
+    --glow-cyan-intense: 0 0 60px rgba(0, 212, 255, 0.5), 0 0 100px rgba(0, 212, 255, 0.3);
+    --glow-blue: 0 0 40px rgba(77, 166, 255, 0.3);
+    --glow-purple: 0 0 40px rgba(159, 122, 234, 0.3);
+
+    /* Typography */
+    --font-family: 'Outfit', sans-serif;
+
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-fast: all 0.2s ease-out;
+}
+
+/* ===================================
+   BASE STYLES
+   =================================== */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    background: var(--color-black);
+    color: var(--color-white);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ===================================
+   STARFIELD CANVAS
+   =================================== */
+
+#starfield {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ===================================
+   HERO SECTION
+   =================================== */
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.35) 60%,
+            rgba(0, 0, 0, 0.55) 100%);
+    z-index: 1;
+    pointer-events: none;
+
+}
+
+.hero-content {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: var(--color-white);
+    text-shadow:
+        0 0 20px rgba(0, 212, 255, 0.5),
+        0 0 40px rgba(0, 212, 255, 0.3),
+        0 0 80px rgba(0, 212, 255, 0.2),
+        0 0 120px rgba(0, 212, 255, 0.1);
+    animation: titleGlow 4s ease-in-out infinite alternate;
+    margin: 0.5rem 0;
+}
+
+@keyframes titleGlow {
+    0% {
+        text-shadow:
+            0 0 20px rgba(0, 212, 255, 0.5),
+            0 0 40px rgba(0, 212, 255, 0.3),
+            0 0 80px rgba(0, 212, 255, 0.2);
+    }
+
+    100% {
+        text-shadow:
+            0 0 30px rgba(0, 212, 255, 0.7),
+            0 0 60px rgba(0, 212, 255, 0.5),
+            0 0 100px rgba(0, 212, 255, 0.3),
+            0 0 140px rgba(0, 212, 255, 0.2);
+    }
+}
+
+.hero-subtitle,
+.hero-tagline {
+    font-size: clamp(1rem, 3vw, 1.8rem);
+    font-weight: 300;
+    letter-spacing: 0.5em;
+    color: var(--color-white-dim);
+    text-transform: uppercase;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.scroll-arrow {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-right: 2px solid var(--color-cyan);
+    border-bottom: 2px solid var(--color-cyan);
+    transform: rotate(45deg);
+    animation: scrollBounce 2s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+@keyframes scrollBounce {
+
+    0%,
+    100% {
+        transform: rotate(45deg) translateY(0);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: rotate(45deg) translateY(10px);
+        opacity: 1;
+    }
+}
+
+/* ===================================
+   HERO VIDEO BACKGROUND
+   =================================== */
+
+.hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    filter: brightness(1.45) contrast(1.1) saturate(1.2);
+}
+
+/* ===================================
+   FEATURES SECTION
+
+   =================================== */
+
+.features {
+    position: relative;
+    min-height: 100vh;
+    padding: 6rem 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.features-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-align: center;
+    color: var(--color-white);
+    margin-bottom: 4rem;
+    text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+.features-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0;
+}
+
+.features-track {
+    display: flex;
+    gap: 3rem;
+    padding: 2rem 4rem;
+    width: max-content;
+    cursor: grab;
+    transition: transform 0.1s ease-out;
+}
+
+.features-track:active {
+    cursor: grabbing;
+}
+
+.features-track.is-hovered .feature-card:not(:hover) {
+    opacity: 0.4;
+    transform: scale(0.98);
+}
+
+/* ===================================
+   FEATURE CARDS
+   =================================== */
+
+.feature-card {
+    position: relative;
+    width: 340px;
+    height: 420px;
+    border-radius: 24px;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+}
+
+.card-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: 26px;
+    background: linear-gradient(135deg, var(--color-cyan), var(--color-cool-blue));
+    opacity: 0;
+    filter: blur(20px);
+    transition: var(--transition-smooth);
+    z-index: -1;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 3rem 2.5rem;
+    border-radius: 24px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: var(--transition-smooth);
+    overflow: hidden;
+}
+
+.card-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.card-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 2rem;
+    color: var(--color-cyan);
+    transition: var(--transition-smooth);
+}
+
+.card-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-white);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+}
+
+.card-description {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--color-white-muted);
+    line-height: 1.6;
+    max-width: 280px;
+}
+
+/* Card Hover States */
+.feature-card:hover {
+    transform: translateY(-12px) scale(1.02);
+}
+
+.feature-card:hover .card-glow {
+    opacity: 0.4;
+}
+
+.feature-card:hover .card-inner {
+    background: var(--glass-bg-hover);
+    border-color: var(--glass-border-hover);
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.feature-card:hover .card-icon {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+}
+
+.feature-card:hover .card-title {
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.feature-card:hover .card-description {
+    color: var(--color-white-dim);
+}
+
+/* Individual Card Color Variations */
+.feature-card[data-feature="spin"] .card-icon {
+    color: var(--color-cool-blue);
+}
+
+.feature-card[data-feature="spin"]:hover .card-glow {
+    background: linear-gradient(135deg, var(--color-cool-blue), var(--color-cyan));
+}
+
+.feature-card[data-feature="rocket"] .card-icon {
+    color: var(--color-cyan);
+}
+
+.feature-card[data-feature="rocket"]:hover .card-glow {
+    background: linear-gradient(135deg, var(--color-cyan), var(--color-cool-blue));
+}
+
+.feature-card[data-feature="galaxy"] .card-icon {
+    color: var(--color-soft-purple);
+}
+
+.feature-card[data-feature="galaxy"]:hover .card-glow {
+    background: linear-gradient(135deg, var(--color-soft-purple), var(--color-cyan));
+}
+
+.feature-card[data-feature="brain"] .card-icon {
+    color: var(--color-cyan);
+}
+
+.feature-card[data-feature="brain"]:hover .card-glow {
+    background: linear-gradient(135deg, var(--color-cyan), var(--color-soft-purple));
+}
+
+/* ===================================
+   SCROLLBAR STYLING
+   =================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-deep-navy);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 212, 255, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 212, 255, 0.5);
+}
+
+/* ===================================
+   RESPONSIVE ADJUSTMENTS
+   =================================== */
+
+@media (max-width: 1200px) {
+    .feature-card {
+        width: 300px;
+        height: 380px;
+    }
+}
+
+@media (max-width: 768px) {
+    .features-track {
+        padding: 2rem;
+        gap: 2rem;
+    }
+
+    .feature-card {
+        width: 280px;
+        height: 360px;
+    }
+}
