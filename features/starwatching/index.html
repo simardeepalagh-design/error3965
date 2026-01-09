@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEEP SPACE STAR EXPLORER</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="scanlines"></div>
+    <div id="vignette"></div>
+
+    <canvas id="starfield"></canvas>
+
+    <div id="hud-container">
+        <!-- Top Bar -->
+        <div class="hud-top">
+            <div class="hud-box tile-left">
+                <span class="hud-label">SYSTEM_STATUS</span>
+                <span class="status-active">ONLINE</span>
+            </div>
+            <div class="hud-title">DEEP SPACE EXPLORER <span class="blink">_</span></div>
+            <div class="hud-box tile-right">
+                <span id="clock" class="hud-text">00:00:00</span>
+            </div>
+        </div>
+
+        <!-- Coordinates -->
+        <div class="hud-panel hud-coords">
+            <div class="hud-header">COORDINATES</div>
+            <div class="data-row"><span class="label">X:</span> <span id="coord-x" class="value">0000.00</span></div>
+            <div class="data-row"><span class="label">Y:</span> <span id="coord-y" class="value">0000.00</span></div>
+            <div class="data-row"><span class="label">Z-IDX:</span> <span id="zoom-level" class="value">1.00</span>
+            </div>
+        </div>
+
+        <!-- Search / Navigation -->
+        <div class="hud-panel hud-nav">
+            <div class="hud-header">NAVIGATE_TO</div>
+            <div class="search-box">
+                <input type="text" id="star-search" placeholder="ENTER STAR NAME..." autocomplete="off">
+                <button id="search-btn">SCAN</button>
+            </div>
+            <div style="text-align: right; margin-top: 5px;">
+                <button id="tour-btn" class="tour-button">AUTOPILOT: OFF</button>
+            </div>
+            <div id="search-msg" class="search-message"></div>
+        </div>
+
+        <!-- Selected Star Info -->
+        <div id="star-info-panel" class="hud-panel hud-info hidden">
+            <div class="hud-header">TARGET INFO</div>
+            <div class="data-row"><span class="label">NAME:</span> <span id="info-name"
+                    class="value highlight">UNKNOWN</span></div>
+            <div class="data-row"><span class="label">TYPE:</span> <span id="info-type" class="value">MAIN SEQ</span>
+            </div>
+            <div class="data-row"><span class="label">DIST:</span> <span id="info-dist" class="value">--- LY</span>
+            </div>
+        </div>
+
+        <!-- Radar / Mini-viz -->
+        <div class="hud-panel hud-radar">
+            <div class="hud-header">RADAR</div>
+            <div class="radar-display">
+                <canvas id="radar-canvas" width="200" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

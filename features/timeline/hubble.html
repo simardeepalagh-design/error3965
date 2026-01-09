@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MISSION: HUBBLE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-mission="hubble">
+
+    <div class="stars"></div>
+    <div class="grid-overlay"></div>
+    <div class="scanlines"></div>
+
+    <div class="interface-container">
+        <a href="index.html" class="nav-back"><button>
+                < BACK TO COMMAND</button></a>
+        <div class="corner-tl"></div>
+        <div class="corner-tr"></div>
+        <div class="corner-bl"></div>
+        <div class="corner-br"></div>
+        <header>
+            <div class="system-title">HST // Telescope Status</div>
+            <div class="system-status">Status: <span>OBSERVING</span></div>
+        </header>
+
+        <main class="main-display">
+            <div class="side-panel left-panel">
+                <div class="data-row"><span>ALT:</span> <span id="altimeter">540 KM</span></div>
+                <div class="data-row"><span>VEL:</span> <span id="velocity">7500 M/S</span></div>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-progress" id="progress-bar"></div>
+                <div class="timeline-markers" id="timeline-markers"></div>
+            </div>
+            <div id="particles-container" class="particles-container"></div>
+            <div class="rocket-wrapper" id="rocket">
+                <div class="rocket-icon">🔭</div>
+                <div class="rocket-flame" id="flame"></div>
+            </div>
+            <div class="mission-card" id="mission-card">
+                <div class="agency-logo-placeholder" id="mission-agency">NASA</div>
+                <div class="mission-year" id="mission-year">YEAR</div>
+                <div class="mission-title" id="mission-title">MISSION</div>
+                <div class="mission-desc" id="mission-desc">--</div>
+            </div>
+            <div class="side-panel right-panel">
+                <div class="data-row"><span>EVT:</span> <span id="mission-count">0/5</span></div>
+                <div class="data-row"><span>T+</span> <span id="timer">00:00:00</span></div>
+            </div>
+        </main>
+        <div class="controls">
+            <button id="btn-init">INITIATE TIMELINE</button>
+            <button id="btn-next" disabled>NEXT EVENT</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

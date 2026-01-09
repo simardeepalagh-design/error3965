@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MISSION CONTROL // DASHBOARD</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="stars"></div>
+    <div class="grid-overlay"></div>
+    <div class="scanlines"></div>
+
+    <div class="interface-container">
+        <header>
+            <div class="system-title">COMMAND CENTER // TERMINAL 00</div>
+            <div class="system-status">System Status: <span>ONLINE</span></div>
+        </header>
+
+        <h1 class="dashboard-title">Select Mission Protocol</h1>
+
+        <div class="mission-grid">
+            <!-- Apollo -->
+            <div class="dashboard-card" onclick="window.location.href='apollo.html'">
+                <h3>Apollo 11</h3>
+                <div class="mission-year">1969</div>
+                <div class="card-icon">🦅</div>
+                <p>First Manned Lunar Landing</p>
+                <button class="btn-access">ACCESS MILESTONES >></button>
+            </div>
+
+            <!-- Voyager -->
+            <div class="dashboard-card" onclick="window.location.href='voyager.html'">
+                <h3>Voyager 1</h3>
+                <div class="mission-year">1977</div>
+                <div class="card-icon">📡</div>
+                <p>Interstellar Space Probe</p>
+                <button class="btn-access">ACCESS MILESTONES >></button>
+            </div>
+
+            <!-- Hubble -->
+            <div class="dashboard-card" onclick="window.location.href='hubble.html'">
+                <h3>Hubble</h3>
+                <div class="mission-year">1990</div>
+                <div class="card-icon">🔭</div>
+                <p>Deep Space Telescope</p>
+                <button class="btn-access">ACCESS MILESTONES >></button>
+            </div>
+
+            <!-- ISS -->
+            <div class="dashboard-card" onclick="window.location.href='iss.html'">
+                <h3>ISS</h3>
+                <div class="mission-year">1998</div>
+                <div class="card-icon">�️</div>
+                <p>International Space Station</p>
+                <button class="btn-access">ACCESS MILESTONES >></button>
+            </div>
+
+            <!-- Curiosity -->
+            <div class="dashboard-card" onclick="window.location.href='curiosity.html'">
+                <h3>Curiosity Rover</h3>
+                <div class="mission-year">2012</div>
+                <div class="card-icon">🤖</div>
+                <p>Mars Exploration Rover</p>
+                <button class="btn-access">ACCESS MILESTONES >></button>
+            </div>
+
+            <!-- JWST -->
+            <div class="dashboard-card" onclick="window.location.href='jwst.html'">
+                <h3>James Webb</h3>
+                <div class="mission-year">2021</div>
+                <div class="card-icon">✨</div>
+                <p>Next Gen Space Telescope</p>
+                <button class="btn-access">ACCESS MILESTONES >></button>
+            </div>
+
+            <!-- Artemis -->
+            <div class="dashboard-card" onclick="window.location.href='artemis.html'">
+                <h3>Artemis I</h3>
+                <div class="mission-year">2022</div>
+                <div class="card-icon">🌑</div>
+                <p>Return to the Moon</p>
+                <button class="btn-access">ACCESS MILESTONES >></button>
+            </div>
+        </div>
+
+        <div class="corner-tl"></div>
+        <div class="corner-tr"></div>
+        <div class="corner-bl"></div>
+        <div class="corner-br"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

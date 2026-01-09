@@ -1,0 +1,330 @@
+:root {
+    --primary-color: #00f3ff;
+    --secondary-color: #0066aa;
+    --alert-color: #ff3333;
+    --bg-color: #050505;
+    --hud-bg: rgba(0, 15, 30, 0.65);
+    --border-width: 2px;
+    --glow: 0 0 10px rgba(0, 243, 255, 0.6), 0 0 20px rgba(0, 243, 255, 0.3);
+    --font-main: 'Orbitron', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    font-family: var(--font-main);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- CANVASES --- */
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    /* Behind HUD */
+}
+
+/* --- OVERLAYS --- */
+#scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0) 50%,
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.2));
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.3;
+}
+
+#vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+    pointer-events: none;
+    z-index: 99;
+}
+
+/* --- HUD LAYOUT --- */
+#hud-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+    /* Let clicks pass to canvas where possible */
+}
+
+/* Elements interactive within HUD need pointer-events: auto */
+.hud-panel,
+.hud-top .hud-box,
+.search-box input,
+.search-box button {
+    pointer-events: auto;
+}
+
+/* Top Stats Bar */
+.hud-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(0, 40, 60, 0.8), transparent);
+}
+
+.hud-box {
+    border: 1px solid var(--primary-color);
+    padding: 8px 16px;
+    background: var(--hud-bg);
+    box-shadow: var(--glow);
+    font-size: 0.9rem;
+}
+
+.hud-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px var(--primary-color);
+    letter-spacing: 2px;
+}
+
+.status-active {
+    color: #44ff44;
+    font-weight: bold;
+    margin-left: 10px;
+    text-shadow: 0 0 5px #44ff44;
+}
+
+/* Floating Panels */
+.hud-panel {
+    position: absolute;
+    background: var(--hud-bg);
+    border: 1px solid var(--primary-color);
+    padding: 15px;
+    box-shadow: var(--glow);
+    backdrop-filter: blur(2px);
+    width: 260px;
+}
+
+.hud-panel::before {
+    /* Corner aesthetic */
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: 10px;
+    height: 10px;
+    border-top: 3px solid white;
+    border-left: 3px solid white;
+}
+
+.hud-panel::after {
+    /* Corner aesthetic */
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 10px;
+    height: 10px;
+    border-bottom: 3px solid white;
+    border-right: 3px solid white;
+}
+
+.hud-header {
+    border-bottom: 1px solid var(--primary-color);
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+/* Coordinates Panel (Bottom Left) */
+.hud-coords {
+    bottom: 30px;
+    left: 30px;
+}
+
+.data-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin: 4px 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+.label {
+    opacity: 0.7;
+}
+
+.value {
+    color: #fff;
+    text-shadow: 0 0 2px var(--primary-color);
+}
+
+/* Navigation Panel (Top Right) */
+.hud-nav {
+    top: 100px;
+    right: 30px;
+}
+
+.search-box {
+    display: flex;
+    gap: 5px;
+}
+
+#star-search {
+    width: 65%;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--secondary-color);
+    color: var(--primary-color);
+    padding: 5px;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+}
+
+#star-search:focus {
+    outline: none;
+    border-color: #fff;
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+#search-btn {
+    flex: 1;
+    background: var(--secondary-color);
+    border: none;
+    color: white;
+    font-family: var(--font-main);
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#search-btn:hover {
+    background: var(--primary-color);
+    color: black;
+}
+
+.search-message {
+    margin-top: 5px;
+    font-size: 0.75rem;
+    color: var(--alert-color);
+    height: 1rem;
+}
+
+/* Info Panel (Bottom Right, above radar if needed, or dynamically shown) */
+.hud-info {
+    top: 240px;
+    /* Below Search */
+    right: 30px;
+    border-color: #fff;
+}
+
+.hidden {
+    display: none;
+}
+
+.highlight {
+    color: #fff;
+    font-size: 1rem;
+    text-shadow: 0 0 5px white;
+}
+
+/* Radar (Bottom Center) */
+.hud-radar {
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    padding: 0;
+    overflow: hidden;
+    background: rgba(0, 10, 20, 0.8);
+}
+
+.hud-radar .hud-header {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    border: none;
+    pointer-events: none;
+    font-size: 0.7rem;
+    opacity: 0.8;
+}
+
+.radar-display {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background:
+        repeating-radial-gradient(transparent 0,
+            transparent 28px,
+            rgba(0, 243, 255, 0.2) 29px,
+            rgba(0, 243, 255, 0.2) 30px),
+        linear-gradient(0deg, transparent 49%, rgba(0, 243, 255, 0.2) 50%, transparent 51%),
+        linear-gradient(90deg, transparent 49%, rgba(0, 243, 255, 0.2) 50%, transparent 51%);
+}
+
+#radar-canvas {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Autopilot Button */
+.tour-button {
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 4px 10px;
+    font-size: 0.7rem;
+    font-family: var(--font-main);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    margin-top: 5px;
+}
+
+.tour-button:hover {
+    background: rgba(0, 243, 255, 0.2);
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.tour-button.active {
+    background: var(--primary-color);
+    color: #000;
+    box-shadow: 0 0 15px var(--primary-color);
+    font-weight: bold;
+}

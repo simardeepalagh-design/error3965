@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Operation: Moon Rescue 🌕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <div class="hologram-container">
+        <div class="scanline"></div>
+        <div class="game-box">
+            <div class="corner-bracket top-left"></div>
+            <div class="corner-bracket top-right"></div>
+            <div class="corner-bracket bottom-left"></div>
+            <div class="corner-bracket bottom-right"></div>
+
+            <header class="terminal-header">
+                <span class="status-dot"></span> SYSTEM: ONLINE
+            </header>
+
+            <h1>🚀 OPERATION: MOON RESCUE</h1>
+
+            <!-- INTRO SECTION -->
+            <div id="intro-content">
+                <div id="mission-text" class="terminal-text"></div>
+                <button id="start-btn" class="start-btn">INITIATE MISSION</button>
+            </div>
+
+            <!-- GAME SECTION -->
+            <div id="game-content" style="display: none;">
+                <!-- MOON IMAGE -->
+                <div class="holo-display">
+                    <img src="moon1.png" alt="Moon status" id="moonImg" class="moon-img">
+                </div>
+
+                <div class="story" id="storyText">
+                    A lunar satellite is drifting off course.
+                    Answer Moon facts correctly to stabilize the mission.
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <div class="question" id="question"></div>
+                <div class="options" id="options"></div>
+                <div class="feedback" id="feedback"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

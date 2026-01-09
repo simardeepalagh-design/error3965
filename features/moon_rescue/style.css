@@ -1,0 +1,444 @@
+:root {
+    --neon-blue: #00f3ff;
+    --neon-green: #0aff00;
+    --neon-red: #ff0055;
+    --bg-dark: #050b14;
+    --panel-bg: rgba(10, 25, 45, 0.85);
+    --grid-color: rgba(0, 243, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Share Tech Mono', monospace;
+    background: radial-gradient(circle at center, #1a2a40 0%, #000000 100%),
+        url('background.png') no-repeat center center fixed;
+    background-size: cover;
+    background-blend-mode: overlay;
+    color: var(--neon-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- Holographic Container --- */
+.hologram-container {
+    position: relative;
+    width: 90%;
+    max-width: 550px;
+    padding: 10px;
+    /* Reduced from 20px */
+}
+
+.game-box {
+    position: relative;
+    background: var(--panel-bg);
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2), inset 0 0 30px rgba(0, 243, 255, 0.1);
+    padding: 20px;
+    /* Reduced from 30px */
+    text-align: center;
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+    /* Grid Pattern Overlay */
+    background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 20px 20px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%,
+            0% 20px, 20px 0%
+            /* Cut corner logic if we want, simplified for now */
+        );
+}
+
+/* --- Scanline Effect --- */
+.scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 243, 255, 0.05) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 10;
+    animation: scan 6s linear infinite;
+}
+
+@keyframes scan {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 100%;
+    }
+}
+
+/* --- Decorative Corners --- */
+.corner-bracket {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--neon-blue);
+    transition: all 0.5s ease;
+}
+
+.top-left {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.top-right {
+    top: -2px;
+    right: -2px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.bottom-left {
+    bottom: -2px;
+    left: -2px;
+    border-right: none;
+    border-top: none;
+}
+
+.bottom-right {
+    bottom: -2px;
+    right: -2px;
+    border-left: none;
+    border-top: none;
+}
+
+.game-box:hover .corner-bracket {
+    width: 30px;
+    height: 30px;
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* --- Typography --- */
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px;
+    /* Reduced from 24px */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px var(--neon-blue);
+    margin-bottom: 10px;
+    /* Reduced from 20px */
+    border-bottom: 2px solid var(--neon-blue);
+    padding-bottom: 8px;
+    /* Reduced from 15px */
+    display: inline-block;
+}
+
+.terminal-header {
+    font-size: 10px;
+    /* Reduced from 12px */
+    text-align: left;
+    margin-bottom: 5px;
+    /* Reduced from 10px */
+    opacity: 0.8;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 6px;
+    /* Reduced from 8px */
+    height: 6px;
+    /* Reduced from 8px */
+    background-color: var(--neon-green);
+    border-radius: 50%;
+    box-shadow: 0 0 5px var(--neon-green);
+    margin-right: 5px;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+.story {
+    font-size: 14px;
+    /* Reduced from 16px */
+    margin-bottom: 15px;
+    /* Reduced from 20px */
+    min-height: 35px;
+    /* Reduced from 40px */
+    /* Prevent jump */
+    color: #bde6ff;
+    text-shadow: 0 0 2px #bde6ff;
+}
+
+/* --- Moon Display --- */
+.holo-display {
+    width: 100px;
+    /* Reduced from 150px */
+    height: 100px;
+    /* Reduced from 150px */
+    margin: 0 auto 15px;
+    /* Reduced margin */
+    position: relative;
+    border-radius: 50%;
+    border: 1px dotted var(--neon-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+}
+
+.moon-img {
+    width: 80px;
+    /* Reduced from 120px */
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* --- Progress Bar --- */
+.progress {
+    height: 8px;
+    /* Reduced from 12px */
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #336699;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    /* Reduced from 25px */
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: repeating-linear-gradient(45deg,
+            var(--neon-blue),
+            var(--neon-blue) 10px,
+            #00a7b0 10px,
+            #00a7b0 20px);
+    box-shadow: 0 0 15px var(--neon-blue);
+    transition: width 0.5s ease-in-out;
+}
+
+/* --- Questions & Options --- */
+.question {
+    font-size: 18px;
+    /* Reduced from 20px */
+    margin-bottom: 15px;
+    /* Reduced from 25px */
+    font-weight: bold;
+    color: #fff;
+}
+
+.options button {
+    width: 100%;
+    margin: 5px 0;
+    /* Reduced from 8px */
+    padding: 10px;
+    /* Reduced from 15px */
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 243, 255, 0.1) 50%, transparent 100%);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    color: var(--neon-blue);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    /* Reduced from 16px */
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.options button:hover {
+    background: rgba(0, 243, 255, 0.2);
+    border-color: var(--neon-blue);
+    letter-spacing: 2px;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+    text-shadow: 0 0 8px var(--neon-blue);
+}
+
+.options button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.options button:hover::before {
+    left: 100%;
+}
+
+/* --- Feedback --- */
+.feedback {
+    margin-top: 20px;
+    min-height: 24px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.success {
+    color: var(--neon-green);
+    text-shadow: 0 0 10px var(--neon-green);
+    animation: pulse-green 1s infinite alternate;
+}
+
+.fail {
+    color: var(--neon-red);
+    text-shadow: 0 0 10px var(--neon-red);
+    animation: shake 0.5s;
+}
+
+@keyframes pulse-green {
+    from {
+        text-shadow: 0 0 10px var(--neon-green);
+    }
+
+    to {
+        text-shadow: 0 0 20px var(--neon-green), 0 0 30px var(--neon-green);
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Intro Section --- */
+#intro-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 350px;
+    padding: 20px;
+}
+
+.terminal-text {
+    font-size: 16px;
+    color: var(--neon-green);
+    text-shadow: 0 0 5px var(--neon-green);
+    text-align: left;
+    white-space: pre-wrap;
+    /* Preserve newlines */
+    width: 100%;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    min-height: 150px;
+    /* Reserve space */
+}
+
+.start-btn {
+    padding: 15px 30px;
+    background: transparent;
+    border: 2px solid var(--neon-blue);
+    color: var(--neon-blue);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+    opacity: 0;
+    /* Hidden initially */
+    transform: translateY(20px);
+    animation: fade-in 1s forwards;
+    /* Will be triggered by JS class */
+    display: none;
+    /* Hidden until needed */
+}
+
+.start-btn:hover {
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 20px var(--neon-blue), inset 0 0 10px var(--neon-blue);
+    transform: scale(1.05);
+}
+
+.start-btn.visible {
+    display: block;
+    animation: fade-up 0.8s forwards;
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
